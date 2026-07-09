@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EHT MLOps</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="nebula-bg"></div>
+
+    <header class="app-header">
+        <div class="logo">
+            <i class="fa-solid fa-server logo-icon"></i>
+            <div class="logo-text">
+                <h1>EHT MLOps</h1>
+                <span>PLATAFORMA DE ORQUESTRAÇÃO CIENTÍFICA: RECONSTRUÇÃO DA SOMBRA DO M87*</span>
+            </div>
+        </div>
+        <div class="header-info">
+            <span class="badge"><i class="fa-solid fa-circle-nodes glow-dot"></i> Apache Airflow v3.2.0</span>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <!-- SEÇÃO ESQUERDA: AIRFLOW DAG VISUALIZER -->
+        <section class="dag-panel">
+            <div class="panel-header">
+                <h2><i class="fa-solid fa-wind"></i> Airflow DAG Graph</h2>
+                <div class="dag-selector">
+                    <button class="dag-tab-btn active" data-dag="reconstruct">
+                        <span class="dag-num">DAG 01</span> Otimização RML
+                    </button>
+                    <button class="dag-tab-btn" data-dag="drift">
+                        <span class="dag-num">DAG 02</span> Monitor Drift
+                    </button>
+                    <button class="dag-tab-btn" data-dag="rag">
+                        <span class="dag-num">DAG 03</span> RAG Catalog
+                    </button>
+                </div>
+            </div>
+
+            <!-- DAG 01: RECONSTRUCTION -->
+            <div class="dag-view active" id="dag-reconstruct">
+                <div class="dag-visual-graph">
+                    <div class="dag-node" id="node-r-ingest">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
+                        <span class="node-name">ingest_vlbi_data</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-r-validate">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-clipboard-check"></i>
+                        <span class="node-name">validate_schema</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-r-calibrate">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span class="node-name">calibrate_data</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-r-reconstruct">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-rotate"></i>
+                        <span class="node-name">reconstruct_image</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-r-evaluate">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span class="node-name">evaluate_recon</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-r-gate">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-code-branch"></i>
+                        <span class="node-name">quality_gate</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-r-register">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-box-archive"></i>
+                        <span class="node-name">register_model</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAG 02: DRIFT MONITORING -->
+            <div class="dag-view" id="dag-drift">
+                <div class="dag-visual-graph">
+                    <div class="dag-node" id="node-d-ref">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-database"></i>
+                        <span class="node-name">extract_ref_data</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-d-scan">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-satellite-dish"></i>
+                        <span class="node-name">extract_cur_scan</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-d-psi">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-percent"></i>
+                        <span class="node-name">calculate_drift_psi</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-d-gate">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-code-branch"></i>
+                        <span class="node-name">drift_gate</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-d-trigger">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-bolt"></i>
+                        <span class="node-name">trigger_retraining</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAG 03: RAG CATALOG REFRESH -->
+            <div class="dag-view" id="dag-rag">
+                <div class="dag-visual-graph">
+                    <div class="dag-node" id="node-g-extract">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-file-export"></i>
+                        <span class="node-name">extract_prod_model</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-g-index">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-arrows-spin"></i>
+                        <span class="node-name">update_vector_index</span>
+                    </div>
+                    <div class="dag-edge"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="dag-node" id="node-g-fresh">
+                        <div class="node-status-dot"></div>
+                        <i class="fa-solid fa-sparkles"></i>
+                        <span class="node-name">validate_freshness</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETAIL & PLOT PANEL (UNDER THE ACTIVE NODE) -->
+            <div class="node-details-card">
+                <div class="details-header">
+                    <h3 id="node-title"><i class="fa-solid fa-circle-info"></i> Pipeline Inicializado</h3>
+                    <span class="task-badge" id="node-status-badge">OCIOSO</span>
+                </div>
+                <div class="details-body">
+                    <p class="node-desc" id="node-desc">Selecione uma DAG no menu superior e clique em "Disparar DAG Run" para começar o monitoramento e o processamento astrofísico.</p>
+                    <div class="node-plot-container" id="node-plot-area">
+                        <!-- Canvas / Plots injected dynamically -->
+                        <div class="visual-placeholder">
+                            <i class="fa-solid fa-rocket" style="font-size: 3rem; color: rgba(56,189,248,0.2); margin-bottom: 1rem;"></i>
+                            <span>Aguardando sinal para disparar DAG.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DIREITA: INTERACTIVE OPERATION BOARD -->
+        <section class="operations-panel">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="ops">
+                    <i class="fa-solid fa-gears"></i> Painel de Operações
+                </button>
+                <button class="tab-btn" data-tab="registry">
+                    <i class="fa-solid fa-box-archive"></i> Model Registry
+                </button>
+                <button class="tab-btn" data-tab="ragchatbot">
+                    <i class="fa-solid fa-comment-dots"></i> Chatbot RAG (LLMOps)
+                </button>
+            </div>
+
+            <!-- TAB 1: OPERATIONS PANEL -->
+            <div class="tab-content active" id="tab-ops">
+                <div class="ops-controls-box">
+                    <h3>Disparador de Execuções</h3>
+                    <div class="dag-trigger-row">
+                        <div class="dag-info-summary">
+                            <span class="active-dag-lbl">DAG Selecionada:</span>
+                            <span class="active-dag-id" id="active-dag-display">01_eht_image_reconstruction</span>
+                        </div>
+                        <button class="trigger-btn" id="btn-trigger-active-dag">
+                            <i class="fa-solid fa-play"></i> Trigger DAG Run
+                        </button>
+                    </div>
+
+                    <!-- Pipeline 2 Drift Simulation slider -->
+                    <div class="ops-simulator-card disabled" id="drift-sim-card">
+                        <div class="card-title-header">
+                            <h4><i class="fa-solid fa-satellite-dish"></i> Simulador de Ruído Atmosférico</h4>
+                            <span class="badge badge-gold">Drift Pipeline</span>
+                        </div>
+                        <p class="card-desc">Simule diferentes turbulências atmosféricas nas observações diárias de rádio para ver o monitor do Airflow decidir o retreinamento via PSI.</p>
+                        <div class="control-group">
+                            <div class="slider-header">
+                                <label>Drift Atmosférico (Ganho/Fase)</label>
+                                <span class="val-display" id="drift-val-display">Moderado (PSI ~0.12)</span>
+                            </div>
+                            <input type="range" min="1" max="3" value="2" class="app-slider" id="drift-severity-slider">
+                        </div>
+                    </div>
+
+                    <!-- Pipeline 3 RAG Refresh display -->
+                    <div class="ops-simulator-card disabled" id="rag-sim-card">
+                        <div class="card-title-header">
+                            <h4><i class="fa-solid fa-database"></i> Indexador Vetorial (RAG)</h4>
+                            <span class="badge badge-sky">LLMOps Pipeline</span>
+                        </div>
+                        <p class="card-desc">Ao aprovar um modelo na DAG 01, seus metadados de massa/spin e parâmetros de calibração são chunkados, vetorizados e indexados no banco semântico para a pesquisa científica.</p>
+                        <div class="rag-status-grid">
+                            <div class="rag-stat-item">
+                                <span class="stat-lbl">Último Run Indexado</span>
+                                <span class="stat-val val-blue" id="rag-last-run-id">Nenhum</span>
+                            </div>
+                            <div class="rag-stat-item">
+                                <span class="stat-lbl">Documentos no Índice</span>
+                                <span class="stat-val" id="rag-document-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: MODEL REGISTRY -->
+            <div class="tab-content" id="tab-registry">
+                <div class="model-registry-wrapper">
+                    <div class="registry-stats">
+                        <div class="stat-card">
+                            <span class="stat-title">Fidelidade Champion</span>
+                            <span class="stat-value text-green" id="champion-fidelity">-</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-title">Massa Estimada</span>
+                            <span class="stat-value text-sky" id="champion-mass">-</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-title">Spin Estimado</span>
+                            <span class="stat-value text-gold" id="champion-spin">-</span>
+                        </div>
+                    </div>
+
+                    <h3>Histórico do Model Registry</h3>
+                    <div class="table-wrapper">
+                        <table class="registry-table" id="airflow-runs-table">
+                            <thead>
+                                <tr>
+                                    <th>Run ID</th>
+                                    <th>Fidelidade (NCC)</th>
+                                    <th>Massa (M☉)</th>
+                                    <th>Spin (a)</th>
+                                    <th>Qual. Gate</th>
+                                    <th>Deploy</th>
+                                </tr>
+                            </thead>
+                            <tbody id="runs-table-body">
+                                <tr class="empty-row" id="empty-runs-row">
+                                    <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">Nenhum modelo registrado nesta sessão. Execute a DAG 01.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: RAG CHATBOT (LLMOPS) -->
+            <div class="tab-content" id="tab-ragchatbot">
+                <div class="rag-chat-wrapper">
+                    <div class="chat-header-desc">
+                        <h4><i class="fa-solid fa-robot"></i> Query Engine do Catálogo EHT</h4>
+                        <p>O Chatbot usa RAG para recuperar os chunks semânticos do arquivo de índice e formular respostas sobre os buracos negros catalogados no Model Registry.</p>
+                        
+                        <!-- Ollama Config Panel -->
+                        <div class="ollama-config-panel">
+                            <div class="ollama-config-item">
+                                <label for="ollama-url"><i class="fa-solid fa-link"></i> Ollama API:</label>
+                                <input type="text" id="ollama-url" value="http://localhost:11434">
+                            </div>
+                            <div class="ollama-config-item">
+                                <label for="ollama-model"><i class="fa-solid fa-microchip"></i> Modelo:</label>
+                                <input type="text" id="ollama-model" value="qwen2:1.5b">
+                            </div>
+                            <div class="ollama-status">
+                                <i class="fa-solid fa-circle-dot status-dot" id="ollama-status-icon"></i>
+                                <span id="ollama-status-text">Ollama Off</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat display -->
+                    <div class="chat-display-area" id="chat-messages">
+                        <div class="chat-msg system">
+                            <i class="fa-solid fa-robot"></i>
+                            <div class="msg-content">
+                                Olá! Sou o assistente científico do Catálogo EHT. Pergunte-me sobre os buracos negros observados (ex: "Qual a massa e o spin de M87*?" ou "Qual a fidelidade da run?").
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RAG retrieved chunks section -->
+                    <div class="retrieved-context-panel" id="retrieved-context-area">
+                        <span class="context-lbl">Contexto Semântico Recuperado (RAG):</span>
+                        <div class="context-content" id="retrieved-text">
+                            Nenhum contexto recuperado ainda. Envie uma mensagem.
+                        </div>
+                    </div>
+
+                    <!-- Chat input -->
+                    <div class="chat-input-row">
+                        <input type="text" placeholder="Pergunte ao Catálogo..." id="chat-input-text" autocomplete="off">
+                        <button class="chat-send-btn" id="btn-send-chat">
+                            <i class="fa-solid fa-paper-plane"></i> Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 EHT MLOps Airflow Suite. Inspirado nas boas práticas da palestra Python Norte 2026.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
